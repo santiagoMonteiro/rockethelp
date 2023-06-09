@@ -1,5 +1,17 @@
 import { useState } from 'react'
-import { Heading, ScrollView, VStack, View, Icon, useTheme } from 'native-base'
+import { Platform } from 'react-native'
+import {
+  Heading,
+  ScrollView,
+  VStack,
+  Icon,
+  useTheme,
+  View,
+  Center,
+  Text,
+  KeyboardAvoidingView,
+} from 'native-base'
+
 import Logo from '../assets/logo_primary.svg'
 import { Envelope, Key } from 'phosphor-react-native'
 import { Input } from '../components/Input'
@@ -16,9 +28,20 @@ export function SignIn() {
   }
 
   return (
-    <View bg='gray.600' minHeight='full'>
-      <ScrollView bg='gray.600'>
-        <VStack flex='1' px='8' pt='24' alignItems='center'>
+    <View pt='24' flex='1' bg='gray.600' px='8'>
+      <KeyboardAvoidingView
+        h={{
+          base: '360',
+          lg: 'auto',
+        }}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      >
+        <VStack
+          flex='1'
+          justifyContent='flex-end'
+          alignItems='center'
+          w='100%'
+        >
           <Logo />
 
           <Heading color='gray.100' fontSize='xl' mt='20' mb='6'>
@@ -43,9 +66,9 @@ export function SignIn() {
             mb='8'
             onChangeText={setPassword}
           />
-          <Button title='Entrar' w='full' onPress={handleSignIn} />
         </VStack>
-      </ScrollView>
+      </KeyboardAvoidingView>
+      <Button title='Entrar' w='full' onPress={handleSignIn} />
     </View>
   )
 }
